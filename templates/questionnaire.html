@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container-fluid" style="width: auto; height: 60px; border: 1px solid #969696"></div>
+<div class="container-fluid">
+    <div class="sidebar col-md-2" style="height: 500px; border: 1px solid #e1e1e1"></div>
+    <div class="content col-md-8" style="margin-top: 30px; margin-left: 20px;">
+        <div class="bs-example" data-example-id="hoverable-table">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>调查问卷名称</th>
+          <th>调查问卷班级</th>
+          <th>参与人数</th>
+          <th>问卷选项</th>
+          <th>问卷地址</th>
+          <th>查看评分</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+            {% for foo in questionnaire_obj %}
+              <td>{{ foo.title }}</td>
+                <td>{{ foo.cls.title }}</td>}
+
+            {% endfor %}
+
+
+          <td>@mdo</td>
+          <td>@mdo</td>
+          <td>@mdo</td>
+          <td>@mdo</td>
+        </tr>
+
+
+      </tbody>
+    </table>
+  </div>
+    </div>
+</div>
+
+</body>
+</html>
