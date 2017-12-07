@@ -1,0 +1,42 @@
+{% extends "questionnaire.html" %}
+
+{% block content %}
+    <h3 class="text-center">添加问卷内容</h3>
+    <div class="container-fluid"
+         style="margin-bottom: 15px; padding: 10px 15px; border: 1px solid #e1e1e1; width: 100%; height: 50px">
+        <div class="pull-right">
+            <button class="btn btn-primary pull-right add-question">添加</button>
+            <button class="btn btn-success pull-right save-question" style="margin-right: 10px;">保存</button>
+        </div>
+    </div>
+
+
+    <div class='container-fluid' style="padding: 5px 10px;height: auto;width: 100%;background-color: #e1e1e1">
+        <form action="" method="post" novalidate>
+            {% csrf_token %}
+            <div>问题1</div>
+            <div style="margin-left: 80px; margin-top: 10px; margin-bottom: 10px">
+                <div style="margin-bottom: 10px">
+                    <label for="" style="padding-right: 10px">问题:</label>
+                    {#    <input type="text" style="width: 500px; height: 60px;">#}
+                    {#        <textarea name="" id="" cols="70" rows="3" style="border: 1px solid #e1e1e1; border-radius: 10px;"></textarea>#}
+                    {{ question_form.caption }}
+                </div>
+                <div>
+                    <label for="" style="padding-right: 10px">类型</label>
+                    {#            <select name="" id="" style="width: 150px; height: 30px">#}
+                    {#                <option value="">1</option>#}
+                    {#                <option value="">2</option>#}
+                    {#                <option value="">3</option>#}
+                    {#            </select>#}
+                    {{ question_form.tp }}
+                </div>
+            </div>
+            <p><input class="pull-right btn btn-default" type="submit" value="提交"></p>
+        </form>
+    </div>
+
+    <script>
+    </script>
+
+{% endblock %}

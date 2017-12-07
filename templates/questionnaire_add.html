@@ -1,0 +1,11 @@
+{% extends "questionnaire.html" %}
+
+{% block content %}
+    <form action="" method="post" novalidate>
+    {% csrf_token %}
+    <p>问卷标题{{ questionnaire_form.title }}</p>
+    <p>选择班级{{ questionnaire_form.cls }}</p>
+    <p>选择创建人{{ questionnaire_form.creator }}</p>
+    <p><input type="submit" value="提交" class="btn btn-default"></p>
+    </form>
+{% endblock %}

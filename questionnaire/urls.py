@@ -23,4 +23,8 @@ urlpatterns = [
 
     url(r"login/", views.login),
     url(r"questionnaire/", views.questionnaire),
+    url(r'^questionnaire_add/$', views.questionnaire_add),
+    url(r'^question/(?P<nid>\d+)$', views.question),
+    url(r'question_edit/(?P<id>\d+)$', views.question_edit),
+
 ]
