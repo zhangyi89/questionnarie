@@ -3,92 +3,135 @@
 {% block content %}
     <h3 class="text-center">显示问卷内容</h3>
     <div class="container-fluid"
-         style="margin-bottom: 15px; padding: 10px 15px; border: 1px solid #e1e1e1; width: 100%; height: 50px">
+         style="margin-bottom: 15px; padding: 5px 10px; width: 100%; height: 50px">
         <div class="pull-right">
 
             <button class="btn btn-primary pull-right add-question">添加</button>
             <button class="btn btn-success pull-right save-question" style="margin-right: 10px;">保存</button>
         </div>
     </div>
-    <ol>                <form class="question-list" action="" method="post" novalidate>
+    <ol>
         {% for foo in form_list %}
-            <div class='container-fluid'
+
+
+            {#            <form class="" action="" method="post" novalidate>#}
+
+            <div class='container-fluid question-list'
                  style="padding: 5px 10px;margin-bottom: 15px; height: auto;width: 100%;background-color: #e1e1e1">
-                    <li>
-                        {% csrf_token %}
-                        {#                        <div>问题{{ forloop.counter }}</div>#}
-                        <div style="margin-left: 80px; margin-top: 10px; margin-bottom: 10px;padding-bottom:15px">
-                            <div style="margin-bottom: 10px">
-                                <label for="" style="padding-right: 10px">问题:</label>
-                                {{ foo.form.caption }}
-                            </div>
-                            <div class="option-type">
-                                <label for="" style="padding-right: 10px">类型</label>
-                                {{ foo.form.tp }}
-{#                                <button class="add-option-type"></button>#}
-                                <button class="{{ foo.option_class }} add-option-type">添加选项</button>
-                            </div>
-                            <div class="option_li">
-                                <ul class="option_li">
-                                    {% for item in foo.options %}
-                                        <li id="{{ item.obj.id }}">{{ item.form }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
+                <li>
+                    <i class=" pull-right glyphicon glyphicon-remove"></i>
+                    {% csrf_token %}
+                    {#                        <div>问题{{ forloop.counter }}</div>#}
+                    <div pk="{{ foo.obj.id }}"
+                         style="margin-left: 80px; margin-top: 10px; margin-bottom: 10px;padding-bottom:15px">
+                        <div style="margin-bottom: 10px">
+                            <label for="" style="padding-right: 10px">问题:</label>
+                            {{ foo.form.caption }}
                         </div>
-                    </li>
+                        <div class="option-type">
+                            <label for="" style="padding-right: 10px">类型</label>
+                            {{ foo.form.tp }}
+                            {#                                <button class="add-option-type"></button>#}
+                            <button class="{{ foo.option_class }} add-option-type">添加选项</button>
+                        </div>
+                        <div class="option-li">
+                            <ul id="option-li">
+                                {% for item in foo.options %}
+                                    <li id="{{ item.obj.id }}">{{ item.form }}
+                                        {#                                            <a href="" class="glyphicon glyphicon-remove"></a>#}
+                                        <span><i class="glyphicon glyphicon-remove"></i></span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </li>
             </div>
+            {#            </form>#}
         {% endfor %}
-                </form>
     </ol>
     <script>
-        // 添加选项
-        console.log($(".option-type"));
-        $(".option-type").on('click', '.add-option-type', function () {
-
-            option_html = '<li>' +
+        // 创建选项的绑定事件,创建一个事件委托
+        $("ol").on("click", ".add-option-type", function () {
+            // 克隆一个标签
+            {#            var optionItem = $("ul li:first").clone();#}
+            var ot = '<li id="">' +
                 '<label for="id_name">选项名称:</label>' +
-                '<input type="text" name="name" value="" maxlength="32" required="" id="id_name">' +
-                '<label for="id_score">对应的分值:</label><input type="number" name="score" value="60" required="" id="id_score"></li>'
-            $(".option_li").append(option_html);
+                '<input type="text" name="name" value="" maxlength="32" required="" id="id_name"> ' +
+                '<label for="id_score">对应的分值:</label>' +
+                '<input type="number" name="score" value="" required="" id="id_score"> ' +
+                '<span><i class="glyphicon glyphicon-remove"></i></span> </li>';
+            // 把这个标签添加到点击的按钮的ul下面
+            //console.log(this);
+            console.log($(this).parent().next().children().append(ot));
+
+            $(this).find("input").each(function () {
+                this.value = " ";
+            });
         });
+
+        // 创建当选项为单选时出现添加选项操作的事件委托
+        $("ol").on("change", "select", function () {
+            if ($(this).val() == 2) {
+                $(this).next().removeClass("hide");
+            } else {
+                $(this).next().addClass("hide");
+                $(this).parent().next().children().children().remove();
+            }
+
+        });
+
+        // 删除事件
+        $("ol").on("click", ".glyphicon-remove", function () {
+            $(this).parent().parent().remove();
+        });
+
+        //添加问题事件
         $(".add-question").click(function () {
-            question_html = '<div class="container-fluid" style="padding: 5px 10px;margin-bottom: 15px; height: auto;width: 100%;background-color: #e1e1e1">\n' +
-                '\n' +
-                '\n' +
-                '                    <li>\n' +
-                '                        <input type="hidden" name="csrfmiddlewaretoken" value="UXo4HXY68AbukaJYguTdatiGauKdYKQukVDpJWNpbYj7uboNrZJvvoSaqQVsUczy">\n' +
-                '                        \n' +
-                '                        <div style="margin-left: 80px; margin-top: 10px; margin-bottom: 10px;padding-bottom:15px">\n' +
-                '                            <div style="margin-bottom: 10px">\n' +
-                '                                <label for="" style="padding-right: 10px">问题:</label>\n' +
-                '                                <input type="text" name="caption" value="" maxlength="64" required="" id="id_caption">\n' +
-                '                            </div>\n' +
-                '                            <div class="option-type">\n' +
-                '                                <label for="" style="padding-right: 10px">类型</label>\n' +
-                '                                <select name="tp" required="" id="id_tp">\n' +
-                '  <option value="">---------</option>\n' +
-                '\n' +
-                '  <option value="1" selected="">打分</option>\n' +
-                '\n' +
-                '  <option value="2">单选</option>\n' +
-                '\n' +
-                '  <option value="3">评价</option>\n' +
-                '\n' +
-                '</select>\n' +
-                '                                <button class="add-option-type">添加选项</button>\n' +
-                '                                <span class="hide option_type"></span>\n' +
-                '                            </div>\n' +
-                '                            <div class="option_li">\n' +
-                '                                <ul id="option_li">\n' +
-                '                                    \n' +
-                '                                </ul>\n' +
-                '                            </div>\n' +
-                '                        </div>\n' +
-                '                    </li>\n' +
-                '\n' +
-                '            </div>';
-            $(".question-list").append(question_html);
+            var questionItem = $("ol div:first").clone();
+            $("ol").append(questionItem);
+            questionItem.find("input").each(function () {
+                this.value = "";
+            });
+            questionItem.find("select").val("");
+            questionItem.find("div").attr("pk","");
+            questionItem.find("ul li").remove();
+        });
+
+        //保存问题事件
+        $(".save-question").click(function () {
+            dataList = [];
+            {#            var question = $("#id_caption").val();#}
+            {#            var optionType = $("#id_tp").val();#}
+            {#            alert(question);#}
+            {#            alert(optionType);#}
+            $("ol div>li").each(function (i, v) {
+                caption = $(this).find("input[name='caption']").val();
+                tp = $(this).find("select[name='tp']").val();
+                id = $(this).find("div").attr("pk");
+                var question = {"id": id, "caption": caption, "tp": tp, "options": []};
+                dataList.push(question);
+                if (tp == 2) {
+                    $(this).find("ul li").each(function () {
+                        name = $(this).find("input[name='name']").val();
+                        score = $(this).find("input[name='score']").val();
+                        console.log($(this));
+                        nid = $(this).attr("id");
+                        options = {"id": nid, "name": name, "score": score};
+                        question["options"].push(options);
+                    });
+                }
+            });
+            console.log(dataList);
+            $.ajax({
+                url: self.location.href,
+                type: "post",
+                headers: {"X-CSRFToken": $.cookie('csrftoken')},
+                data: JSON.stringify(dataList),
+                success: function (arg) {
+                    alert(arg);
+                }
+            })
         })
     </script>
 {% endblock %}

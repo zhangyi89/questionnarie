@@ -1,0 +1,65 @@
+<html>
+<head>
+    <meta content="charset" charset="UTF-8">
+    <style type="text/css">
+        .x{
+
+        }
+        #x li{
+            float:left;
+            margin: 10px;
+        }
+        .p{
+            background-color: red;
+        }
+    </style>
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+
+</head>
+<body>
+    <ul id="x">
+      <li>迈皋桥</li>
+      <li>红山动物园</li>
+      <li>南京站</li>
+      <li>新模范马路</li>
+      <li>玄武门</li>
+      <li>鼓楼</li>
+      <li>珠江路</li>
+      <li>新街口</li>
+      <li>张府园</li>
+      <li>三山街</li>
+      <li>中华门</li>
+      <li>安德门</li>
+  </ul>
+
+  <select id="st">
+      <option value="1">迈皋桥</option>
+      <option value="2">红山动物园</option>
+      <option>南京站</option>
+      <option>新模范马路</option>
+      <option>玄武门</option>
+      <option>鼓楼</option>
+      <option>珠江路</option>
+      <option>新街口</option>
+      <option>张府园</option>
+      <option>三山街</option>
+      <option>中华门</option>
+      <option>安德门</option>
+  </select>
+<div>
+    <select name="" class="qqq">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select>
+</div>
+</body>
+<script>
+    var aa = document.getElementsByClassName("qqq");
+    aa.onchange = function () {
+        alert(this.value)
+    }
+
+
+</script>
+</html>

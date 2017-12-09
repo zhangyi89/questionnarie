@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.min.css">
+    <style>
+        ul li {
+            display: inline-block;
+            text-decoration: none;
+            padding-right: 10px;
+        }
+
+        textarea {
+            width: 400px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+<h1 class="text-center">问卷列表</h1>
+<div class="container">
+    <div class="col-md-8 col-lg-offset-4">
+        <form action="" method="post" novalidate>
+            {% csrf_token %}
+            {% for foo in form %}
+                <p>{{ forloop.counter }}.&nbsp;{{ foo.label }} {{ foo.errors.0 }}</p>
+                {{ foo }}
+            {% endfor %}
+
+            <p><input class="btn btn-info" type="submit" value="提交"></p>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -83,6 +83,7 @@ class Answer(models.Model):
     """
     stu = models.ForeignKey(to="Student")
     question = models.ForeignKey(to="Question")
+    option = models.ForeignKey(to="Option", null=True, blank=True)
     val = models.IntegerField(null=True, blank=True)
     content = models.CharField(max_length=255, null=True, blank=True)
 

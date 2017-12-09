@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>{{ class_name }}:&nbsp;问卷列表</h3>
+{% for questionnaire in questionnaire_list %}
+    <span>{{ forloop.counter }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <a href="/answer/{{ request.session.student_info.class_id }}/{{ questionnaire.id }}">{{ questionnaire.title }}</a>
+{% endfor %}
+</body>
+</html>

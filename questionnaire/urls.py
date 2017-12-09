@@ -22,9 +22,11 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
     url(r"login/", views.login),
-    url(r"questionnaire/", views.questionnaire),
-    url(r'^questionnaire_add/$', views.questionnaire_add),
-    url(r'^question/(?P<nid>\d+)$', views.question),
+    url(r"questionnaire/", views.questionnaire, name="questionnaire"),
+    url(r'^questionnaire_add/$', views.questionnaire_add, name="questionnaire_add"),
+    url(r'^question/(?P<nid>\d+)$', views.question, name="question"),
     url(r'question_edit/(?P<id>\d+)$', views.question_edit),
+    url(r'^answer/(?P<class_id>\d+)/$', views.answer_list, name="answer_list"),
+    url(r'^answer/(?P<class_id>\d+)/(?P<qid>\d+)/$', views.answer_detail, name="answer_detail")
 
 ]

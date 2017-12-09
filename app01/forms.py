@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import ModelForm
+from django.forms import widgets as wd
 
 from app01 import models
 
@@ -25,6 +26,7 @@ class QuestionModelForm(ModelForm):
     class Meta:
         model = models.Question
         fields = ['caption', 'tp']
+        widgets = {'tp': wd.Select(attrs={'class': 'c1'})}
 
 
 class OptionModelForm(ModelForm):

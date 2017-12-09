@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.min.css">
     <script src="/static/jquery-3.2.1.min.js"></script>
+    <script src="/static/jquery.cookie.js"></script>
     <style>
         #id_caption {
             border: 1px solid #e1e1e1;
@@ -20,22 +21,25 @@
         .hide{
             display: none;
         }
+        .text-center{
+            margin-top: 10px;
+        }
         ol{
             list-style: none;
             counter-reset: sectioncounter;
         }
-        li{
+        .question-list > li{
             margin-left: 5px;
         }
-        li:before{
+        .question-list > li:before{
             content: '问题' counter(sectioncounter) ':';
             counter-increment: sectioncounter;
             font-size: 18px;
             color: #969696;
         }
-        ol > li:nth-of-type(odd){
-            background-color: #f9f9f9;
-        }
+{#        form > li:nth-of-type(odd){#}
+{#            background-color: #f9f9f9;#}
+{#        }#}
         #option_li li:before{
             font-size: 12px;
             color: #969696;
